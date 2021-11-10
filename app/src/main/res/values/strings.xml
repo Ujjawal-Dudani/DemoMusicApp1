@@ -1,3 +1,29 @@
 <resources>
     <string name="app_name">DemoMusicApp</string>
+    <string name="shuffle_btn">Shuffle</string>
+    <string name="favourites_btn">Favourites</string>
+    <string name="playlist_btn">Playlist</string>
+    <string name="total_songs">Total Songs</string>
+    <string name="music_player">Music Player</string>
+    <string name="song_name">Song Name</string>
+    <string name="back_btn">Back</string>
+    <string name="start_tv">00:00</string>
+    <string name="end_tv">Loading...</string>
+    <string name="repeat_btn">Repeat</string>
+    <string name="equalizer_btn">Equalizer</string>
+    <string name="timer_btn">Timer</string>
+    <string name="share_btn">Share</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+    <string name="app_icon">Icon</string>
+    <string name="welcometv">Welcome</string>
+    <string name="Feedback">FeedBack</string>
+    <string name="Settings">Settings</string>
+    <string name="About">About</string>
+    <string name="Exit">Exit</string>
+    <string name="song_album">Song Album</string>
+    <string name="min_1">1 Minute</string>
+    <string name="min_5">5 Minutes</string>
+    <string name="min_10">10 Minutes</string>
+    <string name="search_view">Search View</string>
 </resources>
