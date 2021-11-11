@@ -25,6 +25,7 @@ class NotificationReceiver:BroadcastReceiver() {
         PlayerActivity.musicService!!.mediaPlayer!!.start()
         PlayerActivity.musicService!!.showNotification(R.drawable.pause_icon)
         PlayerActivity.binding.playPauseBtnPA.setIconResource(R.drawable.pause_icon)
+        NowPlaying.binding.playPauseBtnNP.setIconResource(R.drawable.pause_icon)
     }
 
     private fun pauseMusic(){
@@ -32,6 +33,7 @@ class NotificationReceiver:BroadcastReceiver() {
         PlayerActivity.musicService!!.mediaPlayer!!.pause()
         PlayerActivity.musicService!!.showNotification(R.drawable.play_icon)
         PlayerActivity.binding.playPauseBtnPA.setIconResource(R.drawable.play_icon)
+        NowPlaying.binding.playPauseBtnNP.setIconResource(R.drawable.play_icon)
     }
 
     private fun prevNextSong(increment:Boolean,context: Context){
@@ -43,8 +45,15 @@ class NotificationReceiver:BroadcastReceiver() {
             .into(PlayerActivity.binding.songImgPA)
 
         PlayerActivity.binding.songNamePA.text = PlayerActivity.musiclistPA[PlayerActivity.songPosition].title
-
+        Glide.with(context)
+            .load(PlayerActivity.musiclistPA[PlayerActivity.songPosition].artUri)
+            .apply(RequestOptions().placeholder(R.drawable.splash_screen).centerCrop())
+            .into(NowPlaying.binding.songImgNP)
+        NowPlaying.binding.songNameNP.text =PlayerActivity.musiclistPA[PlayerActivity.songPosition].title
         playMusic()
+        PlayerActivity.fIndex = favouriteChecker(PlayerActivity.musiclistPA[PlayerActivity.songPosition].id)
+        if(PlayerActivity.isFavourite) PlayerActivity.binding.favouriteBtnPA.setImageResource(R.drawable.favorite_icon)
+        else PlayerActivity.binding.favouriteBtnPA.setImageResource(R.drawable.favorite_empty_icon)
 
     }
 }

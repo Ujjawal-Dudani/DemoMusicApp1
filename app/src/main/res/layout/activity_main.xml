@@ -8,79 +8,95 @@
     tools:openDrawer="start"
     tools:context=".MainActivity">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
-
-        <!-- for three buttons-->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/shuffle_btn"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:drawableTop="@drawable/shuffle_icon"
-            android:contentDescription="@string/shuffle_btn"
-            android:text="@string/shuffle_btn"
-            android:textColor="@color/black"
-            android:textAllCaps="false">
-
-        </Button>
+            android:orientation="vertical">
 
 
-        <Button
-            android:id="@+id/fav_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:drawableTop="@drawable/favorite_icon"
-            android:contentDescription="@string/favourites_btn"
-            android:text="@string/favourites_btn"
-            android:textColor="@color/black"
-            android:textAllCaps="false">
+            <!-- for three buttons-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-        </Button>
+                <Button
+                    android:id="@+id/shuffle_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:drawableTop="@drawable/shuffle_icon"
+                    android:contentDescription="@string/shuffle_btn"
+                    android:text="@string/shuffle_btn"
+                    android:textColor="@color/black"
+                    android:textAllCaps="false">
 
-        <Button
-            android:id="@+id/playlistbtn"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:drawableTop="@drawable/playlist_icon"
-            android:contentDescription="@string/playlist_btn"
-            android:text="@string/playlist_btn"
-            android:textColor="@color/black"
-            android:textAllCaps="false">
+                </Button>
 
-        </Button>
 
-    </LinearLayout>
+                <Button
+                    android:id="@+id/fav_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:drawableTop="@drawable/favorite_icon"
+                    android:contentDescription="@string/favourites_btn"
+                    android:text="@string/favourites_btn"
+                    android:textColor="@color/black"
+                    android:textAllCaps="false">
 
-        <TextView
-            android:id="@+id/totalsongs"
+                </Button>
+
+                <Button
+                    android:id="@+id/playlistbtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:drawableTop="@drawable/playlist_icon"
+                    android:contentDescription="@string/playlist_btn"
+                    android:text="@string/playlist_btn"
+                    android:textColor="@color/black"
+                    android:textAllCaps="false">
+
+                </Button>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/totalsongs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/total_songs"
+                android:textColor="@color/black"
+                android:layout_margin="10dp"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/musicRV"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="vertical"
+                android:scrollbarThumbVertical="@drawable/scrool_bar_icon"/>
+
+        </LinearLayout>
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/nowPlaying"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/total_songs"
-            android:textColor="@color/black"
-            android:layout_margin="10dp"/>
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:name="com.notification.demomusicapp.NowPlaying"
+            tools:layout="@layout/fragment_now_playing"/>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/musicRV"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scrollbars="vertical"
-            android:scrollbarThumbVertical="@drawable/scrool_bar_icon"/>
-
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navdrawer"

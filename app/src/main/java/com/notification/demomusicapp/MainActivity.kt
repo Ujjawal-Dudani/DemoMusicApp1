@@ -8,17 +8,17 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
-import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.SearchView
 import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.gson.GsonBuilder
+import com.google.gson.reflect.TypeToken
 import com.notification.demomusicapp.databinding.ActivityMainBinding
 import java.io.File
 
@@ -31,8 +31,6 @@ class MainActivity : AppCompatActivity() {
      it is used for making the static objects the objects are created only once and can be accessed from any class */
     companion object{
         lateinit var MusicListMA : ArrayList<Music>
-        lateinit var musicListSearch : ArrayList<Music>
-        var search :Boolean = false
     }
 
     @RequiresApi(Build.VERSION_CODES.R)
@@ -48,7 +46,19 @@ class MainActivity : AppCompatActivity() {
         toggle.syncState()
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         if(requestRuntimePermission())
+        {
             initializeLayout()
+
+            //for retrieving favourites data using shared preferences
+            FavouriteActivity.favouriteSongs = ArrayList()
+            val editor = getSharedPreferences("FAVOURITES", MODE_PRIVATE)
+            val jsonString = editor.getString("FavouriteSongs",null)
+            val typeToken = object :TypeToken<ArrayList<Music>>(){}.type // for conversion of json to our required type
+            if(jsonString!= null){
+                val data : ArrayList<Music> = GsonBuilder().create().fromJson(jsonString,typeToken)
+                FavouriteActivity.favouriteSongs.addAll(data)
+            }
+        }
 
         binding.shuffleBtn.setOnClickListener {
             val intent = Intent(this@MainActivity, PlayerActivity::class.java)
@@ -121,8 +131,6 @@ class MainActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.R)
     @SuppressLint("SetTextI18n")
     private fun initializeLayout(){
-
-        search = false
         MusicListMA = getAllAudio()
         // will create only that much object which are required will save the memory efficently (L106)
         binding.musicRV.setHasFixedSize(true)
@@ -174,28 +182,16 @@ class MainActivity : AppCompatActivity() {
         if(!PlayerActivity.isPlaying && PlayerActivity.musicService!= null){
             exitApplication()
         }
+
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.search_view_menu,menu)
-        val searchView = menu?.findItem(R.id.search_view)?.actionView as SearchView
-        searchView.setOnQueryTextListener(object :SearchView.OnQueryTextListener{
-            override fun onQueryTextSubmit(query: String?): Boolean =true
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-                musicListSearch = ArrayList()
-                if(newText!= null){
-                    val userInput =newText.lowercase()
-                    for(song in MusicListMA)
-                        if(song.title.lowercase().contains(userInput))
-                            musicListSearch.add(song)
-                    search = true
-                    musicAdapter.updateMusicList(searchList = musicListSearch)
-
-                }
-                return true
-            }
-        })
-        return super.onCreateOptionsMenu(menu)
+    override fun onResume() {
+        super.onResume()
+        //for storing favourites data using shared preferences
+        val editor = getSharedPreferences("FAVOURITES", MODE_PRIVATE).edit()
+        val jsonString = GsonBuilder().create().toJson(FavouriteActivity.favouriteSongs)
+        editor.putString("FavouriteSongs",jsonString)
+        editor.apply()
     }
+
 }

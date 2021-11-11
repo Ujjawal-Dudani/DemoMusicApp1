@@ -10,7 +10,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.notification.demomusicapp.databinding.MusicViewBinding
 
-class MusicAdapter(private val context: Context,private var musiclist :ArrayList<Music>):RecyclerView.Adapter<MusicAdapter.MyHolder>() {
+class MusicAdapter(private val context: Context,private val musiclist :ArrayList<Music>):RecyclerView.Adapter<MusicAdapter.MyHolder>() {
     class MyHolder(binding: MusicViewBinding): RecyclerView.ViewHolder(binding.root) {
         val title = binding.songnameMV
         val album = binding.songalbumMV
@@ -36,10 +36,19 @@ class MusicAdapter(private val context: Context,private var musiclist :ArrayList
 
         //for moving to respective layout
         holder.root.setOnClickListener {
-            when{
-                MainActivity.search -> sendIntent("MusicAdapterSearch",pos = position)
-                else->sendIntent(ref = "MusicAdapter",pos = position)
+
+            val intent = Intent(context,PlayerActivity::class.java)
+            intent.putExtra("index",position)
+            intent.putExtra("class","MusicAdapter")
+            //here directly start activity is not allowed
+            ContextCompat.startActivity(context,intent,null)
+
+            when
+            {
+                musiclist[position].id == PlayerActivity.nowPlayingId ->
+                sendIntent("NowPlaying",pos = PlayerActivity.songPosition)
             }
+
 
         }
     }
@@ -47,12 +56,8 @@ class MusicAdapter(private val context: Context,private var musiclist :ArrayList
     override fun getItemCount(): Int {
         return musiclist.size
     }
-    fun updateMusicList(searchList:ArrayList<Music>){
-        musiclist = ArrayList()
-        musiclist.addAll(searchList)
-        notifyDataSetChanged()
-    }
-    private fun sendIntent(ref : String, pos:Int){
+
+    private fun sendIntent(ref:String,pos: Int){
         val intent = Intent(context,PlayerActivity::class.java)
         intent.putExtra("index",pos)
         intent.putExtra("class",ref)

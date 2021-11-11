@@ -7,7 +7,18 @@ import kotlin.system.exitProcess
 // it is like normal class but does not have methods only variables used for storing.
 data class Music(val id:String, val title:String, val album:String, val artist:String, val duration:Long =0, val path:String,val artUri:String)
 
+// it will represent a single playlist
+class Playlist{
+    lateinit var name : String
+    lateinit var playlist : ArrayList<Music>
+    lateinit var createdBy : String
+    lateinit var createdOn : String
+}
 
+//this Will refer to playlist class
+class MusicPlaylist{
+    var ref : ArrayList<Playlist> = ArrayList() // for handling json type conversions
+}
 // This function is used for time Duration
 fun format(duration: Long):String{
     val minutes =TimeUnit.MINUTES.convert(duration,TimeUnit.MILLISECONDS)
@@ -49,4 +60,16 @@ fun exitApplication(){
         PlayerActivity.musicService = null
     }
     exitProcess(1)
+}
+
+fun favouriteChecker(id:String) : Int{
+    FavouriteActivity.favouriteSongs.forEachIndexed { index, music ->
+        PlayerActivity.isFavourite = false
+        if(id ==music.id)
+        {
+            PlayerActivity.isFavourite =true
+            return index
+        }
+    }
+    return -1
 }
