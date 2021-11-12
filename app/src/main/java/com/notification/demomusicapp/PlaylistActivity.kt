@@ -30,7 +30,7 @@ class PlaylistActivity : AppCompatActivity() {
         // will create only that much object which are required will save the memory efficently (L106)
         binding.playlistRV.setHasFixedSize(true)
         binding.playlistRV.setItemViewCacheSize(13)
-        binding.playlistRV.layoutManager = GridLayoutManager(this,3)
+        binding.playlistRV.layoutManager = GridLayoutManager(this,2)
         adapter = PlayListAdapter(this, playListlist = musicPlayList.ref)
         binding.playlistRV.adapter = adapter
         binding.addPlaylistBtn.setOnClickListener {

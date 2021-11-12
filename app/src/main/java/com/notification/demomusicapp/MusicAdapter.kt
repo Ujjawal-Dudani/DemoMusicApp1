@@ -10,7 +10,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.notification.demomusicapp.databinding.MusicViewBinding
 
-class MusicAdapter(private val context: Context,private val musiclist :ArrayList<Music>):RecyclerView.Adapter<MusicAdapter.MyHolder>() {
+class MusicAdapter(private val context: Context,private val musiclist :ArrayList<Music>,private var playListDetails:Boolean = false):RecyclerView.Adapter<MusicAdapter.MyHolder>() {
     class MyHolder(binding: MusicViewBinding): RecyclerView.ViewHolder(binding.root) {
         val title = binding.songnameMV
         val album = binding.songalbumMV
@@ -34,21 +34,35 @@ class MusicAdapter(private val context: Context,private val musiclist :ArrayList
             .apply(RequestOptions().placeholder(R.drawable.splash_screen).centerCrop())
             .into(holder.image)
 
-        //for moving to respective layout
-        holder.root.setOnClickListener {
-
-            val intent = Intent(context,PlayerActivity::class.java)
-            intent.putExtra("index",position)
-            intent.putExtra("class","MusicAdapter")
-            //here directly start activity is not allowed
-            ContextCompat.startActivity(context,intent,null)
-
-            when
-            {
-                musiclist[position].id == PlayerActivity.nowPlayingId ->
-                sendIntent("NowPlaying",pos = PlayerActivity.songPosition)
+        when{
+            playListDetails -> {
+                holder.root.setOnClickListener{
+                    val intent = Intent(context,PlayerActivity::class.java)
+                    intent.putExtra("index",position)
+                    intent.putExtra("class","PlayListDetailsAdapter")
+                    //here directly start activity is not allowed
+                    ContextCompat.startActivity(context,intent,null)
+                }
             }
+            else -> {
+                //for moving to respective layout
+                holder.root.setOnClickListener {
 
+                    val intent = Intent(context,PlayerActivity::class.java)
+                    intent.putExtra("index",position)
+                    intent.putExtra("class","MusicAdapter")
+                    //here directly start activity is not allowed
+                    ContextCompat.startActivity(context,intent,null)
+
+                    when
+                    {
+                        musiclist[position].id == PlayerActivity.nowPlayingId ->
+                            sendIntent("NowPlaying",pos = PlayerActivity.songPosition)
+                    }
+
+                }
+
+        }
 
         }
     }

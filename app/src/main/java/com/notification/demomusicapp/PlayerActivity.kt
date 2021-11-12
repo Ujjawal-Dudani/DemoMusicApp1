@@ -282,6 +282,17 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection, MediaPlayer.OnCom
                 setLayout()
 
             }
+
+            "PlayListDetailsAdapter" ->{
+                //for starting service
+                val intent = Intent(this@PlayerActivity, MusicService::class.java)
+                bindService(intent, this, BIND_AUTO_CREATE)
+                startService(intent)
+                musiclistPA = ArrayList()
+                musiclistPA.addAll(PlaylistActivity.musicPlayList.ref[PlaylistDetails.currentPlayListPos].playlist)
+                setLayout()
+
+            }
         }
     }
 
