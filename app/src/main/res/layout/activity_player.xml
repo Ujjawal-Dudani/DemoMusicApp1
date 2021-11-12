@@ -34,6 +34,16 @@
             android:layout_weight="1"
             android:gravity="center"
             tools:ignore="NestedWeights" />
+
+        <ImageView
+            android:id="@+id/AddPlayListBtnPA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="15dp"
+            android:tint="@android:color/holo_red_dark"
+            android:src="@drawable/playlist_icon"
+            tools:ignore="UseAppTint"
+            android:contentDescription="@string/playlist_name" />
         <ImageView
             android:id="@+id/favouriteBtnPA"
             android:layout_width="wrap_content"

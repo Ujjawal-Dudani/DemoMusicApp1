@@ -4,6 +4,7 @@ import android.app.PendingIntent
 import android.app.Service
 import android.content.Intent
 import android.graphics.BitmapFactory
+import android.media.AudioManager
 import android.media.MediaPlayer
 import android.os.Binder
 import android.os.Handler
@@ -16,11 +17,12 @@ import androidx.core.app.NotificationCompat
 * services are used to run process in background and foreground
 *  There is a on bind method which is used to bind service to any activity
 * We have created a inner class (MyBinder) which help us to return object of MainClass */
-class MusicService : Service() {
+class MusicService : Service() ,AudioManager.OnAudioFocusChangeListener {
     private var myBinder =MyBinder()
     var mediaPlayer : MediaPlayer? = null
     private lateinit var mediaSession: MediaSessionCompat
     private lateinit var runnable: Runnable // runnable is a thing which is used to run a code multiple times
+    lateinit var audioManager: AudioManager
 
 
     override fun onBind(intent: Intent?): IBinder {
@@ -33,6 +35,9 @@ class MusicService : Service() {
         }
     }
     fun showNotification(playPauseBtn:Int){
+
+        val intent = Intent(baseContext,MainActivity::class.java)
+        val contentIntent = PendingIntent.getActivity(this,0,intent,0)
 
         val prevIntent =Intent(baseContext,NotificationReceiver::class.java).setAction(ApplicationClass.PREVIOUS)
         val prevPendingIntent = PendingIntent.getBroadcast(baseContext,0,prevIntent,PendingIntent.FLAG_UPDATE_CURRENT)
@@ -57,6 +62,7 @@ class MusicService : Service() {
 
 
         val notification = NotificationCompat.Builder(baseContext,ApplicationClass.CHANNEL_ID)
+            .setContentIntent(contentIntent)
             .setContentTitle(PlayerActivity.musiclistPA[PlayerActivity.songPosition].title)
             .setContentText(PlayerActivity.musiclistPA[PlayerActivity.songPosition].artist)
             .setSmallIcon(R.drawable.music_icon)
@@ -114,5 +120,25 @@ class MusicService : Service() {
 
         }
         Handler(Looper.getMainLooper()).postDelayed(runnable,0) // it ensures the starting of inside handler
+    }
+
+    override fun onAudioFocusChange(focusChange: Int) {
+        if(focusChange <=0 )
+        {
+            //pause music
+            PlayerActivity.binding.playPauseBtnPA.setIconResource(R.drawable.play_icon)
+            NowPlaying.binding.playPauseBtnNP.setIconResource(R.drawable.play_icon)
+            showNotification(R.drawable.play_icon)
+            PlayerActivity.isPlaying = false
+            PlayerActivity.musicService!!.mediaPlayer!!.pause()
+        }
+        else{
+            //play music
+            PlayerActivity.binding.playPauseBtnPA.setIconResource(R.drawable.pause_icon)
+            NowPlaying.binding.playPauseBtnNP.setIconResource(R.drawable.pause_icon)
+            showNotification(R.drawable.pause_icon)
+            PlayerActivity.isPlaying = true
+            mediaPlayer!!.start()
+        }
     }
 }

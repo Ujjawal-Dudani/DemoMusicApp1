@@ -29,6 +29,10 @@ class PlaylistDetails : AppCompatActivity() {
         setContentView(binding.root)
         currentPlayListPos =intent.extras?.get("index") as Int
 
+        try{PlaylistActivity.musicPlayList.ref[currentPlayListPos].playlist =
+            checkPlaylist(playlist = PlaylistActivity.musicPlayList.ref[currentPlayListPos].playlist)}
+        catch(e: Exception){}
+
         binding.playlistDetailsRV.setItemViewCacheSize(10)
         binding.playlistDetailsRV.setHasFixedSize(true)
         binding.playlistDetailsRV.layoutManager = LinearLayoutManager(this)
@@ -76,8 +80,7 @@ class PlaylistDetails : AppCompatActivity() {
                 "Created On :\n${PlaylistActivity.musicPlayList.ref[currentPlayListPos].createdOn}\n\n" +
                 "  -- ${PlaylistActivity.musicPlayList.ref[currentPlayListPos].createdBy}"
 
-        if(adapter.itemCount>0)
-        {
+        if (adapter.itemCount > 0) {
             //for image loading
             Glide.with(this)
                 .load(PlaylistActivity.musicPlayList.ref[currentPlayListPos].playlist[0].artUri)
@@ -88,5 +91,12 @@ class PlaylistDetails : AppCompatActivity() {
         }
         adapter.notifyDataSetChanged()
 
+//        //for storing favourites data using shared preferences
+//        val editor = getSharedPreferences("FAVOURITES", MODE_PRIVATE).edit()
+//        val jsonStringPlaylist = GsonBuilder().create().toJson(PlaylistActivity.musicPlayList)
+//        editor.putString("MusicPLayList",jsonStringPlaylist)
+//        editor.apply()
+//
+//        }
     }
 }

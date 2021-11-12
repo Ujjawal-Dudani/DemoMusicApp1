@@ -1,6 +1,7 @@
 package com.notification.demomusicapp
 
 import android.media.MediaMetadataRetriever
+import java.io.File
 import java.util.concurrent.TimeUnit
 import kotlin.system.exitProcess
 
@@ -55,6 +56,7 @@ fun getImageArt(path: String): ByteArray? {
 fun exitApplication(){
     if(PlayerActivity.musicService!= null)
     {
+        PlayerActivity.musicService!!.audioManager.abandonAudioFocus(PlayerActivity.musicService)
         PlayerActivity.musicService!!.stopForeground(true)
         PlayerActivity.musicService!!.mediaPlayer!!.release() //releases occupied resources
         PlayerActivity.musicService = null
@@ -72,4 +74,12 @@ fun favouriteChecker(id:String) : Int{
         }
     }
     return -1
+}
+fun checkPlaylist(playlist: ArrayList<Music>): ArrayList<Music>{
+    playlist.forEachIndexed { index, music ->
+        val file = File(music.path)
+        if(!file.exists())
+            playlist.removeAt(index)
+    }
+    return playlist
 }

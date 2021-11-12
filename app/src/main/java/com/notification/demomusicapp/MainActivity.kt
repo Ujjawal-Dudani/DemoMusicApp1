@@ -8,6 +8,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.annotation.RequiresApi
@@ -58,7 +59,16 @@ class MainActivity : AppCompatActivity() {
                 val data : ArrayList<Music> = GsonBuilder().create().fromJson(jsonString,typeToken)
                 FavouriteActivity.favouriteSongs.addAll(data)
             }
+
+//           //for retrieving playlist data using shared preferences
+//           PlaylistActivity.musicPlayList = MusicPlaylist()
+//           val jsonStringPLayList = editor.getString("MusicPlayList",null)
+//            if(jsonStringPLayList!= null){
+//              val dataPLayList : MusicPlaylist = GsonBuilder().create().fromJson(jsonStringPLayList,MusicPlaylist::class.java)
+//              PlaylistActivity.musicPlayList = dataPLayList
+//            }
         }
+        Log.e("data retrieved ","data retrieved for playlist ")
 
         binding.shuffleBtn.setOnClickListener {
             val intent = Intent(this@MainActivity, PlayerActivity::class.java)
@@ -191,6 +201,8 @@ class MainActivity : AppCompatActivity() {
         val editor = getSharedPreferences("FAVOURITES", MODE_PRIVATE).edit()
         val jsonString = GsonBuilder().create().toJson(FavouriteActivity.favouriteSongs)
         editor.putString("FavouriteSongs",jsonString)
+//        val jsonStringPlaylist = GsonBuilder().create().toJson(PlaylistActivity.musicPlayList)
+//        editor.putString("MusicPLayList",jsonStringPlaylist)
         editor.apply()
     }
 
