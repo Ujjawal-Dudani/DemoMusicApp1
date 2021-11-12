@@ -1,12 +1,16 @@
 package com.notification.demomusicapp
 
 import android.annotation.SuppressLint
+import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.notification.demomusicapp.databinding.ActivityPlaylistDetailsBinding
 
 class PlaylistDetails : AppCompatActivity() {
@@ -29,12 +33,39 @@ class PlaylistDetails : AppCompatActivity() {
         binding.playlistDetailsRV.setHasFixedSize(true)
         binding.playlistDetailsRV.layoutManager = LinearLayoutManager(this)
 
-        PlaylistActivity.musicPlayList.ref[currentPlayListPos].playlist.addAll(MainActivity.MusicListMA)
         adapter = MusicAdapter(this,PlaylistActivity.musicPlayList.ref[currentPlayListPos].playlist ,playListDetails = true)
         binding.playlistDetailsRV.adapter = adapter
         binding.backBtnPD.setOnClickListener {
             finish()
         }
+        binding.shuffleBtnPD.setOnClickListener {
+            val intent = Intent(this, PlayerActivity::class.java)
+            intent.putExtra("index", 0)
+            intent.putExtra("class", "PlayListDetailsShuffle")
+            startActivity(intent)
+        }
+
+        binding.addBtnPD.setOnClickListener {
+            startActivity(Intent(this,SelectionActivity::class.java))
+        }
+        binding.removeAllPD.setOnClickListener {
+            val builder = MaterialAlertDialogBuilder(this)
+            builder.setTitle("REMOVE")
+                .setMessage("Do You want To Remove  ALL Songs From Playlist")
+                .setPositiveButton("Yes"){ dialog , _  ->
+                    PlaylistActivity.musicPlayList.ref[currentPlayListPos].playlist.clear()
+                    adapter.refreshPlaylist()
+                    dialog.dismiss()
+                }
+                .setNegativeButton("No"){dialog,_ ->
+                    dialog.dismiss()
+                }
+            val customDialog  = builder.create()
+            customDialog.show()
+            customDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.RED)
+            customDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.RED)
+        }
+
     }
 
     @SuppressLint("SetTextI18n")
@@ -55,6 +86,7 @@ class PlaylistDetails : AppCompatActivity() {
 
             binding.shuffleBtnPD.visibility = View.VISIBLE
         }
+        adapter.notifyDataSetChanged()
 
     }
 }
