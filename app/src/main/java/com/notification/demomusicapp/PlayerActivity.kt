@@ -45,7 +45,7 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection, MediaPlayer.OnCom
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setTheme(R.style.Theme_DemoMusicApp) // changing the theme of the activity by default theme provided by the android studio.
+        setTheme(MainActivity.currentThemeNav[MainActivity.themeIndex]) // changing the theme of the activity by default theme provided by the android studio.
         binding = ActivityPlayerBinding.inflate(layoutInflater)
         setContentView(binding.root)
 

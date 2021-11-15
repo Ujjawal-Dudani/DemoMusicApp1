@@ -19,7 +19,7 @@ class FeedBackActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setTheme(R.style.Theme_DemoMusicApp)
+        setTheme(MainActivity.currentThemeNav[MainActivity.themeIndex])
         binding = ActivityFeedBackBinding.inflate(layoutInflater)
         setContentView(binding.root)
         supportActionBar?.title ="Feedback"

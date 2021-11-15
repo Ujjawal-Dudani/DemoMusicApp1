@@ -18,7 +18,7 @@ class FavouriteActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setTheme(R.style.Theme_DemoMusicApp) // changing the theme of the activity by default theme provided by the android studio.
+        setTheme(MainActivity.currentThemeNav[MainActivity.themeIndex])// changing the theme of the activity by default theme provided by the android studio.
         binding = ActivityFavouriteBinding.inflate(layoutInflater)
         setContentView(binding.root)
         favouriteSongs = checkPlaylist(favouriteSongs)

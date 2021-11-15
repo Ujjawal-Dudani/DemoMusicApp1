@@ -13,7 +13,7 @@ class SelectionActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySelectionBinding.inflate(layoutInflater)
-        setTheme(R.style.Theme_DemoMusicApp)
+        setTheme(MainActivity.currentThemeNav[MainActivity.themeIndex])
         setContentView(binding.root)
 
         binding.selectionRV.setItemViewCacheSize(10)

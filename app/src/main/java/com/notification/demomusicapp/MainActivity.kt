@@ -33,12 +33,17 @@ class MainActivity : AppCompatActivity() {
     companion object{
         lateinit var MusicListMA : ArrayList<Music>
         var themeIndex:Int =0
+        val currentTheme = arrayOf(R.style.coolPink,R.style.coolBlue,R.style.coolPurple,R.style.coolGreen,R.style.coolBlack)
+        val currentThemeNav = arrayOf(R.style.coolPinkNav,R.style.coolBlueNav,R.style.coolPurpleNav,R.style.coolGreenNav
+            ,R.style.coolBlackNav)
     }
 
     @RequiresApi(Build.VERSION_CODES.R)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setTheme(R.style.Theme_DemoMusicApp) // changing the theme of the activity by default theme provided by the android studio.
+        val themeEditor = getSharedPreferences("THEMES", MODE_PRIVATE)
+        themeIndex = themeEditor.getInt("themeIndex", 0)
+        setTheme(currentThemeNav[themeIndex]) // changing the theme of the activity by default theme provided by the android studio.
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
