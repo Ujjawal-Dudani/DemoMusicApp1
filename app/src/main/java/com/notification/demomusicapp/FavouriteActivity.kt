@@ -21,6 +21,7 @@ class FavouriteActivity : AppCompatActivity() {
         setTheme(MainActivity.currentThemeNav[MainActivity.themeIndex])// changing the theme of the activity by default theme provided by the android studio.
         binding = ActivityFavouriteBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        supportActionBar?.hide()
         favouriteSongs = checkPlaylist(favouriteSongs)
 
         binding.backBtnFA.setOnClickListener {

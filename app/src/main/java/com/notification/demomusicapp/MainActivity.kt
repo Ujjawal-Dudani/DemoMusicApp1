@@ -9,7 +9,9 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
+import android.view.Menu
 import android.view.MenuItem
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -36,6 +38,8 @@ class MainActivity : AppCompatActivity() {
         val currentTheme = arrayOf(R.style.coolPink,R.style.coolBlue,R.style.coolPurple,R.style.coolGreen,R.style.coolBlack)
         val currentThemeNav = arrayOf(R.style.coolPinkNav,R.style.coolBlueNav,R.style.coolPurpleNav,R.style.coolGreenNav
             ,R.style.coolBlackNav)
+        val currentGradient = arrayOf(R.drawable.gradient_pink,R.drawable.gradient_blue,R.drawable.gradient_purple,R.drawable.gradient_green
+        ,R.drawable.gradient_black)
     }
 
     @RequiresApi(Build.VERSION_CODES.R)
@@ -210,6 +214,12 @@ class MainActivity : AppCompatActivity() {
 //        val jsonStringPlaylist = GsonBuilder().create().toJson(PlaylistActivity.musicPlayList)
 //        editor.putString("MusicPLayList",jsonStringPlaylist)
         editor.apply()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        // for setting theme in nav header
+        findViewById<LinearLayout>(R.id.linearLayoutNVH)?.setBackgroundResource(currentGradient[themeIndex])
+        return super.onCreateOptionsMenu(menu)
     }
 
 }
