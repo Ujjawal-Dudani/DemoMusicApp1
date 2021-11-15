@@ -32,6 +32,7 @@ class MainActivity : AppCompatActivity() {
      it is used for making the static objects the objects are created only once and can be accessed from any class */
     companion object{
         lateinit var MusicListMA : ArrayList<Music>
+        var themeIndex:Int =0
     }
 
     @RequiresApi(Build.VERSION_CODES.R)
@@ -85,9 +86,9 @@ class MainActivity : AppCompatActivity() {
         binding.navdrawer.setNavigationItemSelectedListener{
             when(it.itemId)
             {
-                R.id.navFeedback -> Toast.makeText(baseContext,"Feedback", Toast.LENGTH_SHORT).show()
-                R.id.navSettings -> Toast.makeText(baseContext,"Settings", Toast.LENGTH_SHORT).show()
-                R.id.navAbout -> Toast.makeText(baseContext,"About", Toast.LENGTH_SHORT).show()
+                R.id.navFeedback -> startActivity(Intent(this,FeedBackActivity::class.java))
+                R.id.navSettings -> startActivity(Intent(this,SettingsActivity::class.java))
+                R.id.navAbout -> startActivity(Intent(this,AboutActivity::class.java))
                 R.id.navExit -> {
                     val builder = MaterialAlertDialogBuilder(this)
                     builder.setTitle("EXIT")
