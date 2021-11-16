@@ -27,7 +27,7 @@ import java.io.File
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    private lateinit var toggle: ActionBarDrawerToggle // navigationdrawer
+    private lateinit var toggle: ActionBarDrawerToggle // navigation drawer
     private lateinit var musicAdapter: MusicAdapter
 
     /* companion object is a static object.
@@ -152,7 +152,7 @@ class MainActivity : AppCompatActivity() {
     @SuppressLint("SetTextI18n")
     private fun initializeLayout(){
         MusicListMA = getAllAudio()
-        // will create only that much object which are required will save the memory efficently (L106)
+        // will create only that much object which are required will save the memory efficiently (L106)
         binding.musicRV.setHasFixedSize(true)
         binding.musicRV.setItemViewCacheSize(13)
         binding.musicRV.layoutManager = LinearLayoutManager(this@MainActivity)
