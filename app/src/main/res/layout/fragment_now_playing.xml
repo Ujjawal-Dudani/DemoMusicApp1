@@ -4,8 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="?attr/themeColor"
-    tools:context=".NowPlaying">
+    tools:context=".NowPlaying"
+    android:background="?attr/themeColor">
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/songImgNP"
@@ -14,48 +14,44 @@
         android:layout_marginHorizontal="10dp"
         android:layout_marginVertical="5dp"
         app:shapeAppearanceOverlay="@style/curved"
-        android:src="@drawable/splash_screen"/>
+        android:src="@drawable/music_player_icon_slash_screen"/>
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/nextBtnNP"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_centerVertical="true"
-        android:layout_marginEnd="10dp"
-        android:backgroundTint="?attr/themeColor"
         app:icon="@drawable/next_icon"
+        app:iconTint="@color/white"
+        android:backgroundTint="?attr/themeColor"
+        android:layout_centerVertical="true"
         app:iconSize="40dp"
-        app:iconTint="@color/white" />
+        android:layout_marginEnd="10dp"/>
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/playPauseBtnNP"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_toStartOf="@+id/nextBtnNP"
-        android:layout_marginHorizontal="5dp"
-        android:backgroundTint="?attr/themeColor"
         app:icon="@drawable/play_icon"
+        app:iconTint="@color/white"
+        android:backgroundTint="?attr/themeColor"
+        android:layout_centerVertical="true"
         app:iconSize="40dp"
-        app:iconTint="@color/white" />
-
+        android:layout_toStartOf="@id/nextBtnNP"
+        android:layout_marginHorizontal="5dp"/>
     <TextView
         android:id="@+id/songNameNP"
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:text="@string/song_name"
+        android:textSize="18sp"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:gravity="center"
         android:layout_toStartOf="@id/playPauseBtnNP"
         android:layout_toEndOf="@id/songImgNP"
-        android:gravity="center"
-        android:text="@string/song_name"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        android:textStyle="bold"
         android:ellipsize="marquee"
         android:marqueeRepeatLimit="marquee_forever"
         android:singleLine="true"/>
-
-
-
 
 </RelativeLayout>

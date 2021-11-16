@@ -5,27 +5,25 @@ import android.net.ConnectivityManager
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.notification.demomusicapp.databinding.ActivityFeedBackBinding
+import com.notification.demomusicapp.databinding.ActivityFeedbackBinding
 import java.util.*
-import javax.mail.Message
-import javax.mail.Session
-import javax.mail.Transport
+import javax.mail.*
 import javax.mail.internet.InternetAddress
 import javax.mail.internet.MimeMessage
 
-class FeedBackActivity : AppCompatActivity() {
+class FeedbackActivity : AppCompatActivity() {
 
-    lateinit var binding: ActivityFeedBackBinding
+    lateinit var binding: ActivityFeedbackBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setTheme(MainActivity.currentThemeNav[MainActivity.themeIndex])
-        binding = ActivityFeedBackBinding.inflate(layoutInflater)
+        binding = ActivityFeedbackBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        supportActionBar?.title ="Feedback"
-        binding.sendFEA.setOnClickListener {
-            val feedbackMsg = binding.feedbackMsgFEA.text.toString() + "\n" + binding.emailFEA.text.toString()
-            val subject = binding.topicFEA.text.toString()
+        supportActionBar?.title = "Feedback"
+        binding.sendFA.setOnClickListener {
+            val feedbackMsg = binding.feedbackMsgFA.text.toString() + "\n" + binding.emailFA.text.toString()
+            val subject = binding.topicFA.text.toString()
             val userName = "ujjawal.dudani@twoiq.com"
             val pass = "7069938563@twoiq"
             val cm = this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
@@ -35,11 +33,11 @@ class FeedBackActivity : AppCompatActivity() {
                         val properties = Properties()
                         properties["mail.smtp.auth"] = "true"
                         properties["mail.smtp.starttls.enable"] = "true"
-                        properties["mail.smtp.host"] = "smtp.gmail.com" // smtp.twoiq.com
+                        properties["mail.smtp.host"] = "smtp.gmail.com"
                         properties["mail.smtp.port"] = "587"
-                        val session = Session.getInstance(properties, object : javax.mail.Authenticator(){
-                            override fun getPasswordAuthentication(): javax.mail.PasswordAuthentication {
-                                return javax.mail.PasswordAuthentication(userName, pass)
+                        val session = Session.getInstance(properties, object : Authenticator(){
+                            override fun getPasswordAuthentication(): PasswordAuthentication {
+                                return PasswordAuthentication(userName, pass)
                             }
                         })
                         val mail = MimeMessage(session)

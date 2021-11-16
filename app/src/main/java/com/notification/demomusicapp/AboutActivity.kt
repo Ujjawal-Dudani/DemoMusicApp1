@@ -13,12 +13,11 @@ class AboutActivity : AppCompatActivity() {
         setTheme(MainActivity.currentThemeNav[MainActivity.themeIndex])
         binding = ActivityAboutBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        supportActionBar?.title ="About"
+        supportActionBar?.title = "About"
         binding.aboutText.text = aboutText()
     }
-
-    private fun aboutText():String {
-        return "Developed by Ujjawal" +
-                "\n\n if you want to provide feedback, I will love to hear that."
+    private fun aboutText(): String{
+        return "Developed By: Ujjawal Dudani" +
+                "\n\nIf you want to provide feedback, I will love to hear that."
     }
 }

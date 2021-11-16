@@ -15,82 +15,67 @@ import kotlin.collections.ArrayList
 class PlaylistActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityPlaylistBinding
-    private lateinit var  adapter: PlayListAdapter
+    private lateinit var adapter: PlaylistViewAdapter
 
     companion object{
-         var musicPlayList : MusicPlaylist = MusicPlaylist()
+        var musicPlaylist: MusicPlaylist = MusicPlaylist()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setTheme(MainActivity.currentThemeNav[MainActivity.themeIndex]) // changing the theme of the activity by default theme provided by the android studio.
+        setTheme(MainActivity.currentTheme[MainActivity.themeIndex])
         binding = ActivityPlaylistBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        supportActionBar?.hide()
-
-        // will create only that much object which are required will save the memory efficently (L106)
         binding.playlistRV.setHasFixedSize(true)
         binding.playlistRV.setItemViewCacheSize(13)
-        binding.playlistRV.layoutManager = GridLayoutManager(this,2)
-        adapter = PlayListAdapter(this, playListlist = musicPlayList.ref)
+        binding.playlistRV.layoutManager = GridLayoutManager(this@PlaylistActivity, 2)
+        adapter = PlaylistViewAdapter(this, playlistList = musicPlaylist.ref)
         binding.playlistRV.adapter = adapter
-        binding.addPlaylistBtn.setOnClickListener {
-            customAlertDialogBox()
-        }
-
-        binding.backBtnPLA.setOnClickListener {
-            finish()
-        }
+        binding.backBtnPLA.setOnClickListener { finish() }
+        binding.addPlaylistBtn.setOnClickListener { customAlertDialog() }
     }
-    private  fun customAlertDialogBox(){
-        val customDialog = LayoutInflater.from(this).inflate( R.layout.add_playlist_dialog, binding.root, false )
-        val binder =AddPlaylistDialogBinding.bind(customDialog)
+    private fun customAlertDialog(){
+        val customDialog = LayoutInflater.from(this@PlaylistActivity).inflate(R.layout.add_playlist_dialog, binding.root, false)
+        val binder = AddPlaylistDialogBinding.bind(customDialog)
         val builder = MaterialAlertDialogBuilder(this)
         builder.setView(customDialog)
             .setTitle("Playlist Details")
-            .setPositiveButton("Add"){ dialog , _  ->
-                val playListNameA= binder.playListNameA.text
-                val createdBy =binder.playListUserNameA.text
-                if(playListNameA!=null &&  createdBy!=null )
-                    if(playListNameA.isNotEmpty() &&  createdBy.isNotEmpty()){
-                        addPlayList(playListNameA.toString(),createdBy.toString())
+            .setPositiveButton("ADD"){ dialog, _ ->
+                val playlistName = binder.playlistName.text
+                val createdBy = binder.yourName.text
+                if(playlistName != null && createdBy != null)
+                    if(playlistName.isNotEmpty() && createdBy.isNotEmpty())
+                    {
+                        addPlaylist(playlistName.toString(), createdBy.toString())
                     }
-
                 dialog.dismiss()
             }.show()
-    }
 
-    private fun addPlayList(name:String,createdBy:String){
-        var playListExists =false
-        for (i in musicPlayList.ref)
-        {
-            if(name.equals(i.name))
-            {
-                playListExists =true
+    }
+    private fun addPlaylist(name: String, createdBy: String){
+        var playlistExists = false
+        for(i in musicPlaylist.ref) {
+            if (name == i.name){
+                playlistExists = true
                 break
             }
         }
-        if(playListExists)
-        {
-            Toast.makeText(this, "Playlist Already Exists", Toast.LENGTH_SHORT).show()
-        }
-        else
-        {
+        if(playlistExists) Toast.makeText(this, "Playlist Exist!!", Toast.LENGTH_SHORT).show()
+        else {
             val tempPlaylist = Playlist()
-            tempPlaylist.name =name
+            tempPlaylist.name = name
             tempPlaylist.playlist = ArrayList()
-            tempPlaylist.createdBy =createdBy
+            tempPlaylist.createdBy = createdBy
             val calendar = Calendar.getInstance().time
             val sdf = SimpleDateFormat("dd MMM yyyy", Locale.ENGLISH)
             tempPlaylist.createdOn = sdf.format(calendar)
-
-            musicPlayList.ref.add(tempPlaylist)
-            adapter.refreshPlayList()
+            musicPlaylist.ref.add(tempPlaylist)
+            adapter.refreshPlaylist()
         }
-
     }
 
     override fun onResume() {
         super.onResume()
+        adapter.notifyDataSetChanged()
     }
 }
