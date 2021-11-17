@@ -21,6 +21,7 @@ class MusicAdapter(private val context: Context, private var musicList: ArrayLis
         val image = binding.imageMV
         val duration = binding.songDuration
         val root = binding.root
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyHolder {
@@ -44,10 +45,13 @@ class MusicAdapter(private val context: Context, private var musicList: ArrayLis
             selectionActivity ->{
                 holder.root.setOnClickListener {
                     if(addSong(musicList[position]))
-                        holder.root.setBackgroundColor(ContextCompat.getColor(context, R.color.cool_pink))
+                    {
+                        holder.root.setBackgroundColor(ContextCompat.getColor(context, R.color.cool_green))
+                    }
                     else
-                        holder.root.setBackgroundColor(ContextCompat.getColor(context, R.color.white))
-
+                    {
+                        holder.root.setBackgroundColor(ContextCompat.getColor(context, R.color.red))
+                    }
                 }
             }
             else ->{
