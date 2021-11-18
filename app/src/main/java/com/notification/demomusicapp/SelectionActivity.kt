@@ -24,7 +24,6 @@ class SelectionActivity : AppCompatActivity() {
         adapter = MusicAdapter(this, MainActivity.MusicListMA, selectionActivity = true)
         selectionRV.adapter = adapter
 
-
         addSongsSA.setOnClickListener {
             addSongsSA.visibility = View.VISIBLE
             finish()

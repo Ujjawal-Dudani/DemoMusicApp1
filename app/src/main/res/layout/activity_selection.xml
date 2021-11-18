@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".SelectionActivity">
 
     <LinearLayout
@@ -12,20 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="2dp">
-
-<!--        <ImageButton-->
-<!--            android:id="@+id/backBtnSA"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:src="@drawable/back_icon"-->
-<!--            android:contentDescription="@string/back_btn"-->
-<!--            android:backgroundTint="?colorOnPrimary"-->
-<!--            app:tint="@color/black"-->
-<!--            android:layout_margin="5dp"/>-->
+        android:layout_margin="5dp">
 
         <androidx.appcompat.widget.SearchView
             android:id="@+id/searchViewSA"
@@ -36,7 +22,6 @@
             android:focusable="false"
             app:iconifiedByDefault="false"
             android:background="@drawable/custom_search_view"
-            android:layout_margin="5dp"
             app:closeIcon="@null"/>
     </LinearLayout>
 
@@ -44,38 +29,41 @@
         android:id="@+id/selectionRV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/linearLayout"
         android:scrollbarThumbVertical="@drawable/scroll_bar_icon"
-        android:scrollbars="vertical"
-        android:paddingBottom="50dp"
-        android:layout_marginTop="10dp"/>
-
+        android:layout_below="@+id/linearLayout"
+        android:scrollbars="vertical" />
 
     <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:orientation="horizontal">
-    <Button
-        android:id="@+id/addSongsSA"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Add"
-        android:textColor="@color/white"
-        android:layout_weight="1"
-        android:layout_marginEnd="5dp"
-        android:layout_gravity="center|end" />
-    <Button
-        android:id="@+id/removeSongsSA"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="remove"
-        android:textColor="@color/white"
-        android:layout_weight="1"
-        android:layout_marginEnd="5dp"
-        android:layout_gravity="center|start" />
+
+
+        <Button
+            android:id="@+id/addSongsSA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|start"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="16dp"
+            android:layout_weight="1"
+            android:text="Add"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/removeSongsSA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|start"
+            android:layout_marginEnd="5dp"
+            android:layout_weight="1"
+            android:text="remove"
+            android:textColor="@color/white" />
 
     </LinearLayout>
 
-</LinearLayout>
+</RelativeLayout>
+
+
