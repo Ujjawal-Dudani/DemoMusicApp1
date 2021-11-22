@@ -14,6 +14,8 @@ import android.os.Build
 import android.os.Bundle
 import android.os.IBinder
 import android.provider.MediaStore
+import android.util.Log
+import android.view.View
 import android.widget.LinearLayout
 import android.widget.SeekBar
 import android.widget.Toast
@@ -158,9 +160,12 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection, MediaPlayer.OnCom
             }
             "MusicAdapterSearch"-> initServiceAndPlaylist(MainActivity.musicListSearch, shuffle = false)
             "MusicAdapter" -> initServiceAndPlaylist(MainActivity.MusicListMA, shuffle = false)
-            "FavouriteAdapter"-> initServiceAndPlaylist(FavouriteActivity.favouriteSongs, shuffle = false)
+            "FavouriteAdapter"-> {
+                initServiceAndPlaylist(FavouriteActivity.favouriteSongs, shuffle = false)
+                binding.favouriteBtnPA.visibility = View.INVISIBLE
+            }
             "MainActivity"-> initServiceAndPlaylist(MainActivity.MusicListMA, shuffle = true)
-            "FavouriteShuffle"-> initServiceAndPlaylist(FavouriteActivity.favouriteSongs, shuffle = true)
+            "FavouriteShuffle"->initServiceAndPlaylist(FavouriteActivity.favouriteSongs, shuffle = true)
             "PlaylistDetailsAdapter"->
                 initServiceAndPlaylist(PlaylistActivity.musicPlaylist.ref[PlaylistDetails.currentPlaylistPos].playlist, shuffle = false)
             "PlaylistDetailsShuffle"->
@@ -172,6 +177,7 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection, MediaPlayer.OnCom
 
     private fun setLayout(){
         fIndex = favouriteChecker(musicListPA[songPosition].id)
+        Log.e("findex","${fIndex}")
         Glide.with(this)
             .load(musicListPA[songPosition].artUri)
             .apply(RequestOptions().placeholder(R.drawable.music_player_icon_slash_screen).centerCrop())

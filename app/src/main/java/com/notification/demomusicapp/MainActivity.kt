@@ -73,10 +73,13 @@ class MainActivity : AppCompatActivity() {
             val editor = getSharedPreferences("FAVOURITES", MODE_PRIVATE)
             val jsonString = editor.getString("FavouriteSongs", null)
             val typeToken = object : TypeToken<ArrayList<Music>>(){}.type
-            if(jsonString != null){
+            if(jsonString != null)
+            {
                 val data: ArrayList<Music> = GsonBuilder().create().fromJson(jsonString, typeToken)
                 FavouriteActivity.favouriteSongs.addAll(data)
             }
+
+            //for retrieving PlayList data using shared Preferences
             PlaylistActivity.musicPlaylist = MusicPlaylist()
             val jsonStringPlaylist = editor.getString("MusicPlaylist", null)
             if(jsonStringPlaylist != null){
@@ -212,6 +215,8 @@ class MainActivity : AppCompatActivity() {
         val editor = getSharedPreferences("FAVOURITES", MODE_PRIVATE).edit()
         val jsonString = GsonBuilder().create().toJson(FavouriteActivity.favouriteSongs)
         editor.putString("FavouriteSongs", jsonString)
+
+        //for storing Playlist data using shared preferences
         val jsonStringPlaylist = GsonBuilder().create().toJson(PlaylistActivity.musicPlaylist)
         editor.putString("MusicPlaylist", jsonStringPlaylist)
         editor.apply()

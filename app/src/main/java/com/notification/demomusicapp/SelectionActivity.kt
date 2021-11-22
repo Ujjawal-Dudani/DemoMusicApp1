@@ -1,7 +1,7 @@
 package com.notification.demomusicapp
 
 import android.os.Bundle
-import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat
@@ -10,7 +10,6 @@ import kotlinx.android.synthetic.main.activity_selection.*
 
 class SelectionActivity : AppCompatActivity() {
     private lateinit var adapter: MusicAdapter
-    private var musicList: ArrayList<Music> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,30 +24,28 @@ class SelectionActivity : AppCompatActivity() {
         selectionRV.adapter = adapter
 
         addSongsSA.setOnClickListener {
-            addSongsSA.visibility = View.VISIBLE
+            Toast.makeText(this, "Songs Added To Playlist", Toast.LENGTH_SHORT).show()
             finish()
         }
         removeSongsSA.setOnClickListener {
-            removeSongsSA.visibility = View.VISIBLE
+            Toast.makeText(this, "Songs Removed From Playlist", Toast.LENGTH_SHORT).show()
             finish()
         }
-
-//        addSongsSA.visibility = View.INVISIBLE
-//        removeSongsSA.visibility = View.INVISIBLE
-//        Log.e("song list1::",musicList.size.toString())
-//
-//        if(musicList.size>0)
-//        {
-//            Log.e("song list",musicList.toString())
-//            addSongsSA.visibility = View.VISIBLE
-//            removeSongsSA.visibility = View.VISIBLE
+//        if(musicList.size ==0){
+//            addSongsSA.visibility = View.INVISIBLE
+//            removeSongsSA.visibility = View.INVISIBLE
 //        }
-        /*else {
-            Log.e("song list...",musicList.toString())
-            addSongsSA.visibility = View.INVISIBLE
-            removeSongsSA.visibility = View.INVISIBLE
-        }*/
-
+//        else
+//        {
+//            addSongsSA.setOnClickListener {
+//                addSongsSA.visibility = View.VISIBLE
+//                finish()
+//            }
+//            removeSongsSA.setOnClickListener {
+//                removeSongsSA.visibility = View.VISIBLE
+//                finish()
+//            }
+//        }
 
         //for search View
        searchViewSA.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
