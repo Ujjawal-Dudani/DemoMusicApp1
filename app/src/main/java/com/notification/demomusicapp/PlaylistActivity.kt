@@ -44,10 +44,14 @@ class PlaylistActivity : AppCompatActivity() {
                 val playlistName = binder.playlistName.text
                 val createdBy = binder.yourName.text
                 if(playlistName != null && createdBy != null)
-                    if(playlistName.isNotEmpty() && createdBy.isNotEmpty())
+                    if(playlistName.trim().isNotEmpty() && createdBy.trim().isNotEmpty() )
                     {
                         addPlaylist(playlistName.toString(), createdBy.toString())
                     }
+                if(playlistName!!.trim().isEmpty() || createdBy!!.trim().isEmpty() )
+                {
+                    Toast.makeText(this, "please enter all the fields", Toast.LENGTH_SHORT).show()
+                }
                 dialog.dismiss()
             }.show()
 
