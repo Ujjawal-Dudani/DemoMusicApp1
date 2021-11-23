@@ -15,7 +15,6 @@ import android.os.Bundle
 import android.os.IBinder
 import android.provider.MediaStore
 import android.util.Log
-import android.view.View
 import android.widget.LinearLayout
 import android.widget.SeekBar
 import android.widget.Toast
@@ -162,7 +161,6 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection, MediaPlayer.OnCom
             "MusicAdapter" -> initServiceAndPlaylist(MainActivity.MusicListMA, shuffle = false)
             "FavouriteAdapter"-> {
                 initServiceAndPlaylist(FavouriteActivity.favouriteSongs, shuffle = false)
-                binding.favouriteBtnPA.visibility = View.INVISIBLE
             }
             "MainActivity"-> initServiceAndPlaylist(MainActivity.MusicListMA, shuffle = true)
             "FavouriteShuffle"->initServiceAndPlaylist(FavouriteActivity.favouriteSongs, shuffle = true)
