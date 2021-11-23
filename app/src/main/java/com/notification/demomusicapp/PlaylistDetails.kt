@@ -13,6 +13,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.gson.GsonBuilder
 import com.notification.demomusicapp.databinding.ActivityPlaylistDetailsBinding
+import kotlinx.android.synthetic.main.activity_playlist_details.*
 
 class PlaylistDetails : AppCompatActivity() {
 
@@ -55,6 +56,7 @@ class PlaylistDetails : AppCompatActivity() {
                 .setPositiveButton("Yes"){ dialog, _ ->
                     PlaylistActivity.musicPlaylist.ref[currentPlaylistPos].playlist.clear()
                     adapter.refreshPlaylist()
+                    shuffleBtnPD.visibility = View.INVISIBLE
                     dialog.dismiss()
                 }
                 .setNegativeButton("No"){dialog, _ ->
@@ -65,6 +67,7 @@ class PlaylistDetails : AppCompatActivity() {
             customDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.RED)
             customDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.RED)
         }
+
     }
 
     @SuppressLint("SetTextI18n")
