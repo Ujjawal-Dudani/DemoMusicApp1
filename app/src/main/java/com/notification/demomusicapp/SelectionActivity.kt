@@ -31,21 +31,6 @@ class SelectionActivity : AppCompatActivity() {
             Toast.makeText(this, "Songs Removed From Playlist", Toast.LENGTH_SHORT).show()
             finish()
         }
-//        if(musicList.size ==0){
-//            addSongsSA.visibility = View.INVISIBLE
-//            removeSongsSA.visibility = View.INVISIBLE
-//        }
-//        else
-//        {
-//            addSongsSA.setOnClickListener {
-//                addSongsSA.visibility = View.VISIBLE
-//                finish()
-//            }
-//            removeSongsSA.setOnClickListener {
-//                removeSongsSA.visibility = View.VISIBLE
-//                finish()
-//            }
-//        }
 
         //for search View
        searchViewSA.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
