@@ -31,7 +31,6 @@ class PlaylistActivity : AppCompatActivity() {
         binding.playlistRV.layoutManager = GridLayoutManager(this@PlaylistActivity, 2)
         adapter = PlaylistViewAdapter(this, playlistList = musicPlaylist.ref)
         binding.playlistRV.adapter = adapter
-        binding.backBtnPLA.setOnClickListener { finish() }
         binding.addPlaylistBtn.setOnClickListener { customAlertDialog() }
     }
     private fun customAlertDialog(){
