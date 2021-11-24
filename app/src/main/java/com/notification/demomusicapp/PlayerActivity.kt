@@ -14,7 +14,6 @@ import android.os.Build
 import android.os.Bundle
 import android.os.IBinder
 import android.provider.MediaStore
-import android.util.Log
 import android.widget.LinearLayout
 import android.widget.SeekBar
 import android.widget.Toast
@@ -175,7 +174,6 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection, MediaPlayer.OnCom
 
     private fun setLayout(){
         fIndex = favouriteChecker(musicListPA[songPosition].id)
-        Log.e("findex","${fIndex}")
         Glide.with(this)
             .load(musicListPA[songPosition].artUri)
             .apply(RequestOptions().placeholder(R.drawable.music_player_icon_slash_screen).centerCrop())

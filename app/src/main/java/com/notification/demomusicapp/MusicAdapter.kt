@@ -2,7 +2,6 @@ package com.notification.demomusicapp
 
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
@@ -41,7 +40,6 @@ class MusicAdapter(private val context: Context, private var musicList: ArrayLis
             playlistDetails ->{
                 holder.root.setOnClickListener {
                     sendIntent(ref = "PlaylistDetailsAdapter", pos = position)
-                    Log.e("send","sendIntent")
                 }
             }
             selectionActivity ->{
