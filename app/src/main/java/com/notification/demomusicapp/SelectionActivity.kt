@@ -23,12 +23,12 @@ class SelectionActivity : AppCompatActivity() {
         adapter = MusicAdapter(this, MainActivity.MusicListMA, selectionActivity = true)
         selectionRV.adapter = adapter
 
-        addSongsSA.setOnClickListener {
-            Toast.makeText(this, "Songs Added To Playlist", Toast.LENGTH_SHORT).show()
-            finish()
-        }
+//        addSongsSA.setOnClickListener {
+//            Toast.makeText(this, "Songs Added To Playlist", Toast.LENGTH_SHORT).show()
+//            finish()
+//        }
         removeSongsSA.setOnClickListener {
-            Toast.makeText(this, "Songs Removed From Playlist", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show()
             finish()
         }
 

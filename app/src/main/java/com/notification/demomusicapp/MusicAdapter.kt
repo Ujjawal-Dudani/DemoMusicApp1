@@ -2,12 +2,15 @@ package com.notification.demomusicapp
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.notification.demomusicapp.MusicAdapter.MyHolder
 import com.notification.demomusicapp.databinding.MusicViewBinding
 
@@ -50,8 +53,25 @@ class MusicAdapter(private val context: Context, private var musicList: ArrayLis
                     }
                     else
                     {
-                        holder.root.setBackgroundColor(ContextCompat.getColor(context, R.color.red))
                         //holder.root.visibility = View.INVISIBLE
+                        val builder = MaterialAlertDialogBuilder(context)
+                        builder.setTitle(musicList[position].title)
+                            .setMessage("Song Already Exists Do you want to remove?")
+                            .setPositiveButton("Yes"){ dialog, _ ->
+                                holder.root.setBackgroundColor(ContextCompat.getColor(context, R.color.red))
+                                dialog.dismiss()
+                            }
+                            .setNegativeButton("No"){dialog, _ ->
+                                if(addSong(musicList[position]))
+                                {
+                                    holder.root.setBackgroundColor(ContextCompat.getColor(context, R.color.cool_green))
+                                }
+                                dialog.dismiss()
+                            }
+                        val customDialog = builder.create()
+                        customDialog.show()
+                        customDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.RED)
+                        customDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.RED)
                     }
                 }
             }
