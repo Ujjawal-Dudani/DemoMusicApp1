@@ -72,6 +72,7 @@ class MusicAdapter(private val context: Context, private var musicList: ArrayLis
                         customDialog.show()
                         customDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.RED)
                         customDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.RED)
+                        PlaylistActivity.musicPlaylist.ref[PlaylistDetails.currentPlaylistPos].playlist.add(musicList[position])
                     }
                 }
             }
