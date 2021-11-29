@@ -10,28 +10,28 @@
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_margin="5dp">
+        android:layout_margin="5dp"
+        android:orientation="horizontal">
 
         <androidx.appcompat.widget.SearchView
             android:id="@+id/searchViewSA"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            app:queryHint="@string/search_song"
-            app:searchIcon="@drawable/search_icon"
-            android:focusable="false"
-            app:iconifiedByDefault="false"
             android:background="@drawable/custom_search_view"
-            app:closeIcon="@null"/>
+            android:focusable="false"
+            app:closeIcon="@null"
+            app:iconifiedByDefault="false"
+            app:queryHint="@string/search_song"
+            app:searchIcon="@drawable/search_icon" />
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/selectionRV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scrollbarThumbVertical="@drawable/scroll_bar_icon"
         android:layout_below="@+id/linearLayout"
         android:layout_marginBottom="38dp"
+        android:scrollbarThumbVertical="@drawable/scroll_bar_icon"
         android:scrollbars="vertical" />
 
     <LinearLayout
@@ -44,15 +44,15 @@
         android:orientation="horizontal">
 
 
-<!--        <Button-->
-<!--            android:id="@+id/addSongsSA"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginStart="5dp"-->
-<!--            android:layout_marginEnd="16dp"-->
-<!--            android:layout_weight="1"-->
-<!--            android:text="Add"-->
-<!--            android:textColor="@color/white" />-->
+        <!--        <Button-->
+        <!--            android:id="@+id/addSongsSA"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginStart="5dp"-->
+        <!--            android:layout_marginEnd="16dp"-->
+        <!--            android:layout_weight="1"-->
+        <!--            android:text="Add"-->
+        <!--            android:textColor="@color/white" />-->
 
         <Button
             android:id="@+id/removeSongsSA"
