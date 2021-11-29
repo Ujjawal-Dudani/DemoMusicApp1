@@ -51,29 +51,46 @@
             app:tint="@android:color/holo_red_dark" />
     </LinearLayout>
 
-    <!--    Current Song Image-->
-
+    <!--    Current Song Image Circular -->
     <androidx.cardview.widget.CardView
         android:id="@+id/myCardView"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:layout_marginTop="10dp"
-        app:cardCornerRadius="50dp">
+        app:cardCornerRadius="150dp">
 
-        <com.google.android.material.imageview.ShapeableImageView
+        <ImageView
             android:id="@+id/songImgPA"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="10dp"
-            android:padding="5dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/music_player_icon_slash_screen"
-            app:shapeAppearanceOverlay="@style/curved"
-            app:strokeColor="@color/cool_blue"
-            app:strokeWidth="5dp" />
+            android:src="@drawable/music_player_icon_slash_screen" />
     </androidx.cardview.widget.CardView>
+
+    <!--    Current Song Image Square -->
+    <!--    <androidx.cardview.widget.CardView-->
+    <!--        android:id="@+id/myCardView"-->
+    <!--        android:layout_width="200dp"-->
+    <!--        android:layout_height="200dp"-->
+    <!--        android:layout_centerHorizontal="true"-->
+    <!--        android:layout_centerVertical="true"-->
+    <!--        android:layout_marginTop="10dp"-->
+    <!--        app:cardCornerRadius="50dp">-->
+
+    <!--        <com.google.android.material.imageview.ShapeableImageView-->
+    <!--            android:id="@+id/songImgPA"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="match_parent"-->
+    <!--            android:layout_margin="10dp"-->
+    <!--            android:padding="5dp"-->
+    <!--            android:scaleType="centerCrop"-->
+    <!--            android:src="@drawable/music_player_icon_slash_screen"-->
+    <!--            app:shapeAppearanceOverlay="@style/curved"-->
+    <!--            app:strokeColor="@color/cool_blue"-->
+    <!--            app:strokeWidth="5dp" />-->
+    <!--    </androidx.cardview.widget.CardView>-->
+
 
     <!--    Current Song Name-->
     <TextView
