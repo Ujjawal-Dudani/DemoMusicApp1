@@ -13,4 +13,6 @@
     <color name="cool_pink">#F50057</color>
     <color name="yellow">#FFD600</color>
     <color name="red">#D61B0D</color>
+    <color name="grey">#79666666</color>
+
 </resources>

@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".PlayerActivity"
+    android:background="@drawable/gradient_blue"
     android:orientation="vertical"
     android:gravity="center">
 
@@ -51,16 +52,27 @@
     </LinearLayout>
 
 <!--    Current Song Image-->
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/myCardView"
+        android:layout_marginTop="10dp"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        app:cardCornerRadius="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true">
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/songImgPA"
-        android:layout_width="250dp"
-        android:layout_height="250dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_margin="10dp"
         android:padding="5dp"
         android:src="@drawable/music_player_icon_slash_screen"
         app:shapeAppearanceOverlay="@style/curved"
         app:strokeColor="@color/cool_blue"
-        app:strokeWidth="5dp"/>
+        app:strokeWidth="5dp"
+        android:scaleType="centerCrop"/>
+    </androidx.cardview.widget.CardView>
 
 <!--    Current Song Name-->
     <TextView
@@ -69,6 +81,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
         android:text="@string/song_name"
+        android:layout_marginTop="30dp"
         android:textSize="18sp"
         android:textColor="?colorOnPrimary"
         android:gravity="center"
